@@ -1,0 +1,160 @@
+---
+---
+<section class="hero mesh-bg">
+  <div class="hero__inner container">
+
+    <div class="hero__badge reveal" style="--d:0s">
+      <span class="hero__badge-dot" aria-hidden="true"></span>
+      IA para agencias de viajes boutique
+    </div>
+
+    <h1 class="hero__title reveal" style="--d:0.08s">
+      Cualifica tus leads de viaje<br />
+      con <span class="t-gradient">inteligencia artificial</span>
+    </h1>
+
+    <p class="hero__sub reveal" style="--d:0.16s">
+      ViaIQ perfila a tus clientes potenciales automáticamente,<br class="hero__sub-br" />
+      generando un <strong>Traveler DNA</strong> único antes de que<br class="hero__sub-br" />
+      inviertas tiempo en ellos.
+    </p>
+
+    <div class="hero__actions reveal" style="--d:0.24s">
+      <a href="#pricing" class="btn btn-primary btn-lg">
+        Ver planes y precios
+      </a>
+      <button class="btn btn-secondary btn-lg hero-open-modal">
+        Probar gratis
+      </button>
+    </div>
+
+    <div class="hero__trust reveal" style="--d:0.32s">
+      <span class="hero__trust-item">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+          <path d="M1.5 6.5l3 3 7-7" stroke="var(--primary)" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Sin tarjeta de crédito
+      </span>
+      <span class="hero__trust-dot" aria-hidden="true"></span>
+      <span class="hero__trust-item">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+          <path d="M1.5 6.5l3 3 7-7" stroke="var(--primary)" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        14 días gratis
+      </span>
+      <span class="hero__trust-dot" aria-hidden="true"></span>
+      <span class="hero__trust-item">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+          <path d="M1.5 6.5l3 3 7-7" stroke="var(--primary)" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Cancela cuando quieras
+      </span>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.hero-open-modal').forEach(b =>
+    b.addEventListener('click', () =>
+      document.dispatchEvent(new CustomEvent('open-modal', { detail: { mode: 'register', plan: 'FREE' } }))
+    )
+  );
+</script>
+
+<style>
+  .hero {
+    padding-top: calc(68px + clamp(80px, 10vw, 140px));
+    padding-bottom: clamp(80px, 10vw, 140px);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-8);
+    max-width: 780px;
+  }
+
+  /* Badge */
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    background: var(--primary-fixed);
+    color: var(--on-primary-fixed);
+    font-size: var(--text-micro);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: var(--r-full);
+  }
+
+  .hero__badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--primary);
+    animation: pulse-glow 2.5s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  /* Title */
+  .hero__title {
+    font-family: var(--font-display);
+    font-size: var(--text-hero);
+    font-weight: 900;
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+    color: var(--on-surface);
+    max-width: 720px;
+  }
+
+  /* Sub */
+  .hero__sub {
+    font-size: clamp(1rem, 1.8vw, 1.1875rem);
+    line-height: 1.7;
+    color: var(--on-surface-var);
+    max-width: 520px;
+  }
+  .hero__sub strong { color: var(--on-surface); font-weight: 600; }
+  @media (max-width: 600px) { .hero__sub-br { display: none; } }
+
+  /* Actions */
+  .hero__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Trust strip */
+  .hero__trust {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: var(--sp-2);
+  }
+  .hero__trust-item {
+    display: flex; align-items: center; gap: var(--sp-2);
+    font-size: var(--text-xs); color: var(--on-surface-muted); font-weight: 500;
+  }
+  .hero__trust-dot {
+    width: 3px; height: 3px; border-radius: 50%;
+    background: var(--outline-var);
+  }
+
+  @media (max-width: 640px) {
+    .hero__actions { flex-direction: column; width: 100%; }
+    .hero__actions .btn { width: 100%; max-width: 320px; }
+    .hero__trust { gap: var(--sp-3); }
+    .hero__trust-dot { display: none; }
+  }
+</style>

@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const plan = Astro.url.searchParams.get('plan') ?? '';
+const isFree  = plan === 'free';
+const isLogin = plan === 'login';
+
+let title    = '¡Suscripción activada!';
+let subtitle = 'Tu cuenta ya está lista. Puedes acceder al dashboard ahora.';
+
+if (isFree) {
+  title    = '¡Bienvenido a ViaIQ!';
+  subtitle = 'Tu cuenta gratuita ha sido creada. Comienza a explorar la plataforma.';
+} else if (isLogin) {
+  title    = '¡Bienvenido de vuelta!';
+  subtitle = 'Sesión iniciada correctamente. Redirigiendo al dashboard...';
+}
+---
+
+<Layout title="Éxito — ViaIQ">
+  <div class="success-page">
+    <div class="success-card">
+      <!-- Animated check -->
+      <div class="success-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none" width="64" height="64">
+          <circle cx="32" cy="32" r="32" fill="var(--color-primary-light)"/>
+          <path
+            class="check-path"
+            d="M18 32l10 10 18-18"
+            stroke="var(--color-primary)"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="none"
+          />
+        </svg>
+      </div>
+
+      <div class="success-text">
+        <h1>{title}</h1>
+        <p>{subtitle}</p>
+      </div>
+
+      <a href="/" class="btn btn-primary btn-lg">
+        Ir al inicio
+      </a>
+
+      {!isFree && !isLogin && (
+        <p class="success-note">
+          Recibirás un email de confirmación con los detalles de tu suscripción.
+        </p>
+      )}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  @import '../styles/global.css';
+
+  .success-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-beige);
+    padding: var(--space-6);
+  }
+
+  .success-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-modal);
+    padding: var(--space-12) var(--space-10);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+    animation: card-in 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+  }
+
+  @keyframes card-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .success-icon {
+    animation: bounce-in 0.5s cubic-bezier(0.34, 1.5, 0.64, 1) 0.1s both;
+  }
+
+  @keyframes bounce-in {
+    from { transform: scale(0.5); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+  }
+
+  /* SVG stroke dash animation */
+  .check-path {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    animation: draw-check 0.5s ease-out 0.35s forwards;
+  }
+
+  @keyframes draw-check {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .success-text h1 {
+    font-size: 1.625rem;
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: var(--space-2);
+  }
+
+  .success-text p {
+    font-size: 1rem;
+    color: var(--color-gray-mid);
+    line-height: 1.6;
+  }
+
+  .success-note {
+    font-size: 0.8125rem;
+    color: var(--color-gray-mid);
+  }
+</style>

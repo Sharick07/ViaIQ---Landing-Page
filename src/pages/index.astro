@@ -1,11 +1,33 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Navbar from '../components/Navbar.astro';
+import HeroSection from '../components/HeroSection.astro';
+import StatsBar from '../components/StatsBar.astro';
+import ProblemSection from '../components/ProblemSection.astro';
+import TravelerDNA from '../components/TravelerDNA.astro';
+import Features from '../components/Features.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import CTASection from '../components/CTASection.astro';
+import PricingCards from '../components/PricingCards.astro';
+import Footer from '../components/Footer.astro';
+import AuthModal from '../components/AuthModal.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="ViaIQ — Inteligencia artificial para agencias de viajes"
+  description="Califica automáticamente tus leads con IA, genera perfiles Traveler DNA y organiza tu pipeline en un Kanban inteligente. Convierte más en menos tiempo."
+>
+  <Navbar />
+  <main id="main-content">
+    <HeroSection />
+    <StatsBar />
+    <ProblemSection />
+    <TravelerDNA />
+    <Features />
+    <HowItWorks />
+    <CTASection />
+    <PricingCards />
+  </main>
+  <Footer />
+  <AuthModal />
 </Layout>

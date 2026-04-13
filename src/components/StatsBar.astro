@@ -1,0 +1,89 @@
+---
+// Propuesta de valor — características reales del producto, sin métricas inventadas
+---
+<section class="statsbar">
+  <div class="container statsbar__grid">
+    {[
+      {
+        icon: `<svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2.5 9.5L7 14L15.5 5" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`,
+        label: 'Calificación automática',
+        desc: 'Score 0–100 generado en segundos, sin trabajo manual',
+      },
+      {
+        icon: `<svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M9 2l1.6 3.4 3.8.5-2.7 2.7.6 3.8L9 10.7 5.7 12.4l.6-3.8L3.6 5.9l3.8-.5L9 2z"
+                stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>`,
+        label: 'Traveler DNA™',
+        desc: 'Perfil completo con arquetipo e insights generados por IA',
+      },
+      {
+        icon: `<svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="2" y="2" width="4" height="14" rx="1.5" stroke="currentColor" stroke-width="1.7"/>
+          <rect x="7" y="2" width="4" height="9" rx="1.5" stroke="currentColor" stroke-width="1.7"/>
+          <rect x="12" y="2" width="4" height="6" rx="1.5" stroke="currentColor" stroke-width="1.7"/>
+        </svg>`,
+        label: 'Kanban inteligente',
+        desc: 'Pipeline Cold / Warm / Hot organizado automáticamente',
+      },
+      {
+        icon: `<svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M1 9h16M9 1v16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>`,
+        label: 'Desde $0',
+        desc: 'Plan gratuito para siempre — sin tarjeta de crédito',
+      },
+    ].map((s, i) => (
+      <div class="statsbar__item reveal" style={`--d:${(i * 0.08).toFixed(2)}s`}>
+        <div class="statsbar__icon" set:html={s.icon}></div>
+        <div class="statsbar__text">
+          <strong>{s.label}</strong>
+          <span>{s.desc}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .statsbar {
+    background: var(--surface-lowest);
+    padding-block: var(--sp-10);
+    border-bottom: 1px solid var(--surface-container);
+  }
+
+  .statsbar__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-5);
+  }
+
+  .statsbar__item {
+    display: flex; align-items: flex-start; gap: var(--sp-4);
+    padding: var(--sp-5) var(--sp-6);
+    border-radius: var(--r-lg);
+    background: var(--surface-low);
+    transition: transform var(--dur-mid) var(--ease-out), box-shadow var(--dur-mid);
+  }
+  .statsbar__item:hover { transform: translateY(-3px); box-shadow: var(--sh-md); }
+
+  .statsbar__icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    border-radius: var(--r-md);
+    background: var(--primary-fixed);
+    color: var(--primary);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .statsbar__text { display: flex; flex-direction: column; gap: 4px; }
+  .statsbar__text strong {
+    font-size: var(--text-xs); font-weight: 700; color: var(--on-surface);
+  }
+  .statsbar__text span { font-size: var(--text-micro); color: var(--on-surface-muted); line-height: 1.5; }
+
+  @media (max-width: 900px) { .statsbar__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .statsbar__grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,207 @@
+---
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+
+    <div class="footer__brand">
+      <a href="/" class="footer__logo" aria-label="ViaIQ — Inicio">
+        <div class="footer__mark" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <path d="M2 8.5l4 4L14 4" stroke="white" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="footer__wordmark">ViaIQ</span>
+      </a>
+
+      <p class="footer__tagline">
+        Inteligencia artificial para agencias de viajes boutique.
+        Convierte más leads en menos tiempo, sin perder el toque personal.
+      </p>
+
+      <div class="footer__social">
+        <a href="#" class="footer__social-btn" aria-label="LinkedIn" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" stroke-width="1.7"/>
+            <path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 014 0v4M11 10v7"
+                  stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </a>
+        <a href="#" class="footer__social-btn" aria-label="Instagram" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.7"/>
+            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.7"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#" class="footer__social-btn" aria-label="Twitter / X" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+            <path d="M4 4l16 16M4 20L20 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="footer__trust">
+        <div class="footer__trust-dot" aria-hidden="true"></div>
+        <span>Acceso anticipado disponible</span>
+      </div>
+    </div>
+
+    <div class="footer__cols">
+      {[
+        {
+          title: 'Producto',
+          links: [
+            { label: 'Funciones', href: '#features' },
+            { label: 'Cómo funciona', href: '#how-it-works' },
+            { label: 'Planes y precios', href: '#pricing' },
+            { label: 'Traveler DNA™', href: '#features' },
+          ],
+        },
+        {
+          title: 'Empresa',
+          links: [
+            { label: 'Sobre ViaIQ', href: '#' },
+            { label: 'Blog', href: '#' },
+            { label: 'Casos de éxito', href: '#' },
+            { label: 'Contacto', href: '#' },
+          ],
+        },
+        {
+          title: 'Legal',
+          links: [
+            { label: 'Privacidad', href: '#' },
+            { label: 'Términos de uso', href: '#' },
+            { label: 'Cookies', href: '#' },
+            { label: 'Estado del servicio', href: '#' },
+          ],
+        },
+      ].map((col) => (
+        <div class="footer__col">
+          <h4 class="t-label footer__col-title">{col.title}</h4>
+          <nav>
+            {col.links.map((l) => (
+              <a href={l.href} class="footer__link">{l.label}</a>
+            ))}
+          </nav>
+        </div>
+      ))}
+    </div>
+
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <span>© 2025 ViaIQ. Todos los derechos reservados.</span>
+      <span class="footer__bottom-right">
+        Hecho con cuidado para agencias en LATAM
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M10 17s-7-4.5-7-9a5 5 0 0110 0c0 4.5-3 9-3 9z" fill="var(--tertiary)" opacity="0.7"/>
+        </svg>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--surface-container); }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--sp-16);
+    padding-block: var(--sp-16);
+  }
+
+  /* Brand column */
+  .footer__brand { display: flex; flex-direction: column; gap: var(--sp-5); }
+
+  .footer__logo {
+    display: flex; align-items: center; gap: var(--sp-2);
+    width: fit-content;
+  }
+  .footer__mark {
+    width: 30px; height: 30px; border-radius: var(--r-md);
+    background: var(--grad-primary);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .footer__wordmark {
+    font-family: var(--font-display);
+    font-size: 1.0625rem; font-weight: 800;
+    color: var(--on-surface); letter-spacing: -0.02em;
+  }
+  .footer__tagline {
+    font-size: var(--text-xs);
+    color: var(--on-surface-muted); line-height: 1.65;
+    max-width: 240px;
+  }
+
+  .footer__social { display: flex; gap: var(--sp-2); }
+  .footer__social-btn {
+    width: 36px; height: 36px; border-radius: var(--r-md);
+    background: var(--surface-lowest);
+    color: var(--on-surface-var);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--sh-xs);
+    transition: background var(--dur-fast), color var(--dur-fast), transform var(--dur-fast);
+  }
+  .footer__social-btn:hover {
+    background: var(--primary-fixed);
+    color: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  .footer__trust {
+    display: flex; align-items: center; gap: var(--sp-2);
+    font-size: var(--text-micro); color: var(--on-surface-muted);
+  }
+  .footer__trust-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #4caf6e;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(76,175,110,0.18);
+    animation: pulse-glow 2.5s ease-in-out infinite;
+  }
+
+  /* Link columns */
+  .footer__cols {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-8);
+    padding-top: var(--sp-2);
+  }
+  .footer__col { display: flex; flex-direction: column; gap: var(--sp-4); }
+  .footer__col nav { display: flex; flex-direction: column; gap: var(--sp-3); }
+  .footer__col-title { color: var(--on-surface-muted); }
+  .footer__link {
+    font-size: var(--text-xs); color: var(--on-surface-var);
+    transition: color var(--dur-fast);
+    width: fit-content;
+  }
+  .footer__link:hover { color: var(--primary); }
+
+  /* Bottom bar */
+  .footer__bottom {
+    background: var(--surface-highest);
+    padding-block: var(--sp-5);
+    border-top: 1px solid rgba(194,200,193,0.25);
+  }
+  .footer__bottom-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: var(--sp-3);
+    font-size: var(--text-micro); color: var(--on-surface-muted);
+  }
+  .footer__bottom-right {
+    display: flex; align-items: center; gap: var(--sp-2);
+  }
+
+  @media (max-width: 900px) {
+    .footer__inner { grid-template-columns: 1fr; gap: var(--sp-10); }
+    .footer__cols  { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .footer__cols  { grid-template-columns: 1fr; }
+    .footer__bottom-inner { flex-direction: column; align-items: flex-start; }
+  }
+</style>

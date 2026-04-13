@@ -1,0 +1,212 @@
+---
+const features = [
+  {
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <path d="M11 2l2 4 4.5.7-3.3 3.2.8 4.5L11 12.3 7 14.4l.8-4.5L4.5 6.7 9 6 11 2z"
+            stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>`,
+    badge: 'Core',
+    title: 'Calificación automática',
+    desc: 'Score 0–100 calculado en segundos: presupuesto, urgencia y destino analizados sin depender de la intuición del agente.',
+    highlight: true,
+  },
+  {
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <circle cx="11" cy="8" r="4" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M3 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </svg>`,
+    badge: null,
+    title: 'Traveler DNA™',
+    desc: 'Perfil completo generado por IA: arquetipo de viajero, preferencias detectadas e insights accionables listos para usar.',
+    highlight: false,
+  },
+  {
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <rect x="2" y="3" width="5" height="16" rx="1.5" stroke="currentColor" stroke-width="1.7"/>
+      <rect x="9" y="3" width="5" height="11" rx="1.5" stroke="currentColor" stroke-width="1.7"/>
+      <rect x="16" y="3" width="5" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/>
+    </svg>`,
+    badge: null,
+    title: 'Kanban inteligente',
+    desc: 'Pipeline visual Cold / Warm / Hot. Los leads se ubican automáticamente por prioridad — sin mover tarjetas a mano.',
+    highlight: false,
+  },
+  {
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V9l-5-7z"
+            stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M13 2v7h7M9 12h4M9 16h2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </svg>`,
+    badge: null,
+    title: 'Campañas de captación',
+    desc: 'Links públicos con cuestionario inteligente. Control por IP, métricas por campaña y leads que llegan ya cualificados.',
+    highlight: false,
+  },
+  {
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M13.7 21a2 2 0 01-3.4 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </svg>`,
+    badge: null,
+    title: 'Alertas en tiempo real',
+    desc: 'Notificación inmediata cuando un lead marca 70+ puntos. Tu agente actúa en el momento exacto de mayor intención.',
+    highlight: false,
+  },
+  {
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+      <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </svg>`,
+    badge: null,
+    title: 'Gestión de equipo',
+    desc: 'Roles OWNER y AGENT. Asigna leads, controla accesos y monitorea el rendimiento de cada miembro en tiempo real.',
+    highlight: false,
+  },
+];
+---
+
+<section class="features section" id="features">
+  <div class="container">
+
+    <div class="features__hd text-center reveal">
+      <div class="chip">Funciones clave</div>
+      <h2 class="t-xl features__title">
+        Todas las herramientas.<br />Cero fricción.
+      </h2>
+      <p class="t-body features__sub">
+        Diseñado específicamente para agencias de viajes boutique.
+        Sin módulos que no usas — solo lo que convierte leads en clientes.
+      </p>
+    </div>
+
+    <div class="features__grid">
+      {features.map((f, i) => (
+        <div
+          class:list={['features__card', 'reveal', { 'features__card--hl': f.highlight }]}
+          style={`--d:${(i * 0.07).toFixed(2)}s`}
+        >
+          <div class="features__card-header">
+            <div class="features__icon" set:html={f.icon} aria-hidden="true"></div>
+            {f.badge && (
+              <span class="features__badge chip chip--tertiary"
+                    style="font-size:0.6rem;padding:2px 8px">{f.badge}</span>
+            )}
+          </div>
+          <h3 class="features__card-title">{f.title}</h3>
+          <p class="features__card-desc">{f.desc}</p>
+          <div class="features__card-arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor"
+                    stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .features { background: var(--surface-low); }
+
+  .features__hd {
+    display: flex; flex-direction: column; align-items: center;
+    gap: var(--sp-5); margin-bottom: var(--sp-12);
+  }
+  .features__title { max-width: 500px; }
+  .features__sub   { max-width: 440px; }
+
+  .features__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-6);
+  }
+
+  .features__card {
+    position: relative;
+    background: var(--surface-lowest);
+    border-radius: var(--r-xl);
+    padding: var(--sp-8);
+    display: flex; flex-direction: column; gap: var(--sp-4);
+    box-shadow: var(--sh-sm);
+    border: 1px solid rgba(194,200,193,0.15);
+    transition: box-shadow var(--dur-mid) var(--ease-out),
+                transform var(--dur-mid) var(--ease-out);
+    overflow: hidden;
+  }
+  .features__card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--grad-primary);
+    opacity: 0;
+    transition: opacity var(--dur-mid) var(--ease-out);
+    border-radius: inherit;
+  }
+  .features__card:hover {
+    box-shadow: var(--sh-lg);
+    transform: translateY(-4px);
+  }
+  .features__card:hover::before { opacity: 0.025; }
+
+  .features__card--hl {
+    background: var(--grad-primary);
+    border-color: transparent;
+    box-shadow: var(--sh-xl);
+  }
+  .features__card--hl::before { display: none; }
+  .features__card--hl:hover {
+    box-shadow: 0 40px 80px rgba(56,83,65,0.22), 0 8px 24px rgba(56,83,65,0.12);
+    transform: translateY(-5px);
+  }
+  .features__card--hl .features__card-title,
+  .features__card--hl .features__card-desc { color: rgba(255,255,255,0.92); }
+  .features__card--hl .features__icon {
+    background: rgba(255,255,255,0.15);
+    color: white;
+  }
+  .features__card--hl .features__card-arrow {
+    color: rgba(255,255,255,0.5);
+  }
+
+  .features__card-header {
+    display: flex; align-items: center; gap: var(--sp-3);
+  }
+
+  .features__icon {
+    width: 48px; height: 48px;
+    border-radius: var(--r-md);
+    background: var(--primary-fixed);
+    color: var(--primary);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: transform var(--dur-mid) var(--ease-spring);
+  }
+  .features__card:hover .features__icon { transform: scale(1.06); }
+
+  .features__card-title {
+    font-family: var(--font-display);
+    font-size: var(--text-md); font-weight: 700;
+    color: var(--on-surface); letter-spacing: -0.015em;
+    line-height: 1.3;
+  }
+  .features__card-desc {
+    font-size: var(--text-xs);
+    color: var(--on-surface-var); line-height: 1.65;
+    flex: 1;
+  }
+  .features__card-arrow {
+    color: var(--outline-var);
+    margin-top: auto;
+    transition: color var(--dur-mid), transform var(--dur-mid) var(--ease-spring);
+    align-self: flex-end;
+  }
+  .features__card:hover .features__card-arrow {
+    color: var(--primary);
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 900px) { .features__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .features__grid { grid-template-columns: 1fr; } }
+</style>

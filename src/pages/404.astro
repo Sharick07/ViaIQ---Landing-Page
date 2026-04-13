@@ -1,0 +1,166 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Página no encontrada — ViIQ">
+  <div class="not-found">
+    <div class="not-found__card">
+
+      <!-- Decorative -->
+      <div class="not-found__blob" aria-hidden="true"></div>
+
+      <!-- Logo -->
+      <div class="not-found__logo" aria-hidden="true">
+        <div class="logo-mark">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M4 12l5.5 5.5L20 7" stroke="white"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span>ViIQ</span>
+      </div>
+
+      <!-- Number -->
+      <div class="not-found__number" aria-hidden="true">404</div>
+
+      <div class="not-found__content">
+        <h1 class="not-found__title">Esta página no existe</h1>
+        <p class="not-found__sub">
+          La página que buscas se fue de vacaciones o nunca existió.
+          No hay problema, puedes volver al inicio.
+        </p>
+        <div class="not-found__actions">
+          <a href="/" class="btn btn-primary btn-lg">
+            Volver al inicio
+          </a>
+          <a href="/#pricing" class="btn btn-secondary btn-lg">
+            Ver planes
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  @import '../styles/global.css';
+
+  .not-found {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-surface);
+    padding: var(--space-6);
+  }
+
+  .not-found__card {
+    position: relative;
+    background: var(--surface-lowest);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-ambient-lg);
+    padding: var(--space-16) var(--space-12);
+    text-align: center;
+    max-width: 520px;
+    width: 100%;
+    overflow: hidden;
+    animation: card-up 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+  }
+
+  @keyframes card-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Blob decoration */
+  .not-found__blob {
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    background: var(--primary-fixed);
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /* Logo */
+  .not-found__logo {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+  }
+
+  .logo-mark {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .not-found__logo span {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    letter-spacing: -0.02em;
+  }
+
+  /* Giant 404 */
+  .not-found__number {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 20vw, 8rem);
+    font-weight: 800;
+    color: var(--primary-fixed);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: var(--space-6);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Content */
+  .not-found__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .not-found__title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    letter-spacing: -0.02em;
+  }
+
+  .not-found__sub {
+    font-size: var(--text-body-md);
+    color: var(--on-surface-variant);
+    line-height: 1.65;
+    max-width: 380px;
+  }
+
+  .not-found__actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  @media (max-width: 520px) {
+    .not-found__card { padding: var(--space-10) var(--space-6); }
+  }
+</style>

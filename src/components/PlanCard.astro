@@ -1,0 +1,240 @@
+---
+interface Props {
+  id: 'FREE' | 'PRO' | 'MAX';
+  name: string;
+  price: string;
+  period: string;
+  description: string;
+  features: string[];
+  notIncluded?: string[];
+  cta: string;
+  highlighted: boolean;
+  popular?: boolean;
+}
+
+const { id, name, price, period, description, features, notIncluded = [], cta, highlighted, popular } = Astro.props;
+---
+
+<article
+  class:list={['plan-card', { 'plan-card--highlight': highlighted }]}
+  data-plan-id={id}
+>
+  {popular && (
+    <div class="plan-card__popular">Más popular</div>
+  )}
+
+  <div class="plan-card__top">
+    <div class="plan-card__name-row">
+      <span class="plan-card__name">{name}</span>
+      {id === 'FREE' && (
+        <span class="chip" style="font-size:0.625rem;padding:3px 10px">Gratis</span>
+      )}
+      {id === 'MAX' && !highlighted && (
+        <span class="chip chip--tertiary" style="font-size:0.625rem;padding:3px 10px">Team</span>
+      )}
+    </div>
+    <p class="plan-card__desc">{description}</p>
+  </div>
+
+  <div class="plan-card__price-row">
+    <span class="plan-card__price">{price}</span>
+    <div class="plan-card__period-wrap">
+      {id !== 'FREE' ? (
+        <span class="plan-card__period">/ {period}</span>
+      ) : (
+        <span class="plan-card__period">{period}</span>
+      )}
+    </div>
+  </div>
+
+  <div class="plan-card__divider" aria-hidden="true"></div>
+
+  <ul class="plan-card__features" aria-label={`Incluido en plan ${name}`}>
+    {features.map((f) => (
+      <li class="plan-card__feat">
+        <span class="plan-card__feat-icon plan-card__feat-icon--yes" aria-hidden="true">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path d="M1.5 5l2.5 2.5 4.5-5" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>{f}</span>
+      </li>
+    ))}
+    {notIncluded.map((f) => (
+      <li class="plan-card__feat plan-card__feat--no">
+        <span class="plan-card__feat-icon plan-card__feat-icon--no" aria-hidden="true">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path d="M2 2l6 6M8 2l-6 6" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span>{f}</span>
+      </li>
+    ))}
+  </ul>
+
+  <button
+    class:list={['btn', 'btn-full', 'plan-cta-btn', highlighted ? 'btn-primary' : 'btn-secondary']}
+    data-plan={id}
+    aria-label={`${cta} — Plan ${name}`}
+  >
+    {cta}
+    {highlighted && (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor"
+              stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    )}
+  </button>
+</article>
+
+<style>
+  .plan-card {
+    position: relative;
+    background: var(--surface-lowest);
+    border-radius: var(--r-xl);
+    padding: var(--sp-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+    box-shadow: var(--sh-sm);
+    border: 1px solid rgba(194,200,193,0.22);
+    transition: box-shadow var(--dur-mid) var(--ease-out), transform var(--dur-mid) var(--ease-out);
+    overflow: hidden;
+  }
+  /* Subtle top accent for non-highlighted cards */
+  .plan-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--surface-container);
+  }
+
+  .plan-card:hover {
+    box-shadow: var(--sh-lg);
+    transform: translateY(-4px);
+  }
+
+  /* Highlighted — Stripe-style premium card */
+  .plan-card--highlight {
+    background: var(--grad-primary);
+    border-color: transparent;
+    box-shadow: var(--sh-xl), 0 0 0 1px rgba(56,83,65,0.2);
+  }
+  .plan-card--highlight::before {
+    background: rgba(255,255,255,0.25);
+  }
+  .plan-card--highlight:hover {
+    box-shadow: 0 40px 80px rgba(56,83,65,0.28), 0 8px 24px rgba(56,83,65,0.14);
+    transform: translateY(-6px);
+  }
+
+  .plan-card--highlight .plan-card__name { color: var(--on-primary); }
+  .plan-card--highlight .plan-card__price { color: var(--on-primary); }
+  .plan-card--highlight .plan-card__desc { color: rgba(255,255,255,0.75); }
+  .plan-card--highlight .plan-card__period { color: rgba(255,255,255,0.6); }
+  .plan-card--highlight .plan-card__divider { background: rgba(255,255,255,0.12); }
+  .plan-card--highlight .plan-card__feat { color: rgba(255,255,255,0.9); }
+  .plan-card--highlight .plan-card__feat--no { color: rgba(255,255,255,0.35); }
+  .plan-card--highlight .plan-card__feat-icon--yes {
+    background: rgba(255,255,255,0.18);
+    color: white;
+  }
+  .plan-card--highlight .plan-card__feat-icon--no {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* Popular badge */
+  .plan-card__popular {
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--tertiary);
+    color: white;
+    font-size: var(--text-micro);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 16px;
+    border-radius: var(--r-full);
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(104,67,72,0.3);
+  }
+
+  .plan-card__top { display: flex; flex-direction: column; gap: var(--sp-2); }
+
+  .plan-card__name-row {
+    display: flex; align-items: center; gap: var(--sp-3);
+  }
+
+  .plan-card__name {
+    font-family: var(--font-display);
+    font-size: 1.125rem; font-weight: 800;
+    color: var(--on-surface); letter-spacing: -0.02em;
+  }
+
+  .plan-card__desc {
+    font-size: var(--text-xs);
+    color: var(--on-surface-muted);
+    line-height: 1.55;
+  }
+
+  .plan-card__price-row {
+    display: flex; align-items: baseline; gap: var(--sp-2);
+  }
+
+  .plan-card__price {
+    font-family: var(--font-display);
+    font-size: 2.75rem; font-weight: 900;
+    color: var(--on-surface);
+    letter-spacing: -0.04em; line-height: 1;
+  }
+
+  .plan-card__period-wrap { display: flex; flex-direction: column; }
+  .plan-card__period {
+    font-size: var(--text-xs);
+    color: var(--on-surface-muted);
+  }
+
+  .plan-card__divider {
+    height: 1px;
+    background: var(--surface-container);
+  }
+
+  .plan-card__features {
+    display: flex; flex-direction: column;
+    gap: var(--sp-3); flex: 1;
+  }
+
+  .plan-card__feat {
+    display: flex; align-items: flex-start;
+    gap: var(--sp-3);
+    font-size: var(--text-xs);
+    color: var(--on-surface-var);
+    line-height: 1.5;
+  }
+
+  .plan-card__feat--no {
+    color: var(--on-surface-muted);
+    opacity: 0.55;
+  }
+
+  .plan-card__feat-icon {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+
+  .plan-card__feat-icon--yes {
+    background: var(--primary-fixed);
+    color: var(--primary);
+  }
+
+  .plan-card__feat-icon--no {
+    background: var(--surface-container);
+    color: var(--on-surface-muted);
+  }
+</style>

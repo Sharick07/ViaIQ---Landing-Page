@@ -1,0 +1,170 @@
+---
+---
+
+<section class="cta-mid section section--low">
+  <div class="container">
+    <div class="cta-mid__card reveal">
+
+      <!-- Decorative blobs -->
+      <div class="cta-mid__blob cta-mid__blob--a" aria-hidden="true"></div>
+      <div class="cta-mid__blob cta-mid__blob--b" aria-hidden="true"></div>
+      <div class="cta-mid__blob cta-mid__blob--c" aria-hidden="true"></div>
+
+      <div class="cta-mid__content">
+        <div class="chip chip--ghost">14 días gratis · Sin tarjeta de crédito</div>
+
+        <h2 class="t-xl cta-mid__title">
+          Empieza hoy.<br />
+          Tus competidores<br />ya lo hacen.
+        </h2>
+
+        <p class="cta-mid__sub">
+          Deja de tratar todos los leads igual.
+          ViaIQ los califica automáticamente para que sepas exactamente dónde enfocar tu energía.
+          Configúralo en menos de 10 minutos.
+        </p>
+
+        <div class="cta-mid__actions">
+          <button class="btn btn-lg cta-mid__cta cta-register-btn">
+            Crear mi cuenta gratis
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M3.5 9h11M10 4.5l4.5 4.5L10 13.5" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <p class="cta-mid__guarantee">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M6 1l1.1 2.4 2.7.4-1.95 1.9.46 2.7L6 7.2 3.69 8.44l.46-2.7L2.2 3.84l2.7-.4L6 1z"
+                    fill="rgba(255,255,255,0.55)"/>
+            </svg>
+            Sin contratos · Cancela cuando quieras · Soporte incluido
+          </p>
+        </div>
+      </div>
+
+      <div class="cta-mid__stats">
+        {[
+          { value: '10 min', label: 'para configurar y empezar' },
+          { value: '14 días', label: 'de prueba gratuita incluida' },
+          { value: '$0', label: 'para comenzar — sin tarjeta' },
+        ].map((s) => (
+          <div class="cta-mid__stat">
+            <strong>{s.value}</strong>
+            <span>{s.label}</span>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.cta-register-btn').forEach((btn) => {
+    btn.addEventListener('click', () =>
+      document.dispatchEvent(new CustomEvent('open-modal', { detail: { mode: 'register', plan: 'FREE' } }))
+    );
+  });
+</script>
+
+<style>
+  .cta-mid { background: var(--surface-low); }
+
+  .cta-mid__card {
+    position: relative;
+    background: var(--grad-primary);
+    border-radius: var(--r-xl);
+    padding: clamp(var(--sp-12), 7vw, var(--sp-20)) clamp(var(--sp-8), 6vw, var(--sp-20));
+    overflow: hidden;
+    box-shadow: var(--sh-xl), 0 0 0 1px rgba(56,83,65,0.12);
+    display: flex; flex-direction: column;
+    gap: var(--sp-12); align-items: center; text-align: center;
+  }
+
+  /* Decorative blobs */
+  .cta-mid__blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(56px); pointer-events: none;
+  }
+  .cta-mid__blob--a {
+    width: 320px; height: 320px;
+    background: rgba(204,234,210,0.2);
+    top: -80px; right: -40px;
+  }
+  .cta-mid__blob--b {
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.08);
+    bottom: -50px; left: 8%;
+  }
+  .cta-mid__blob--c {
+    width: 160px; height: 160px;
+    background: rgba(80,107,88,0.35);
+    top: 40%; left: 40%;
+    filter: blur(80px);
+  }
+
+  .cta-mid__content {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; gap: var(--sp-6);
+    max-width: 560px;
+  }
+
+  .cta-mid__title {
+    color: var(--on-primary);
+    line-height: 1.1;
+  }
+
+  .cta-mid__sub {
+    font-size: var(--text-sm); line-height: 1.65;
+    color: rgba(255,255,255,0.75);
+    max-width: 460px;
+  }
+
+  .cta-mid__actions {
+    display: flex; flex-direction: column; align-items: center; gap: var(--sp-4);
+    width: 100%;
+  }
+
+  .cta-mid__cta {
+    background: var(--surface-lowest);
+    color: var(--primary);
+    padding: 16px 40px;
+    font-size: var(--text-base); font-weight: 700;
+    border-radius: var(--r-xl);
+    box-shadow: var(--sh-lg);
+    gap: var(--sp-3);
+    transition: transform var(--dur-mid) var(--ease-out),
+                box-shadow var(--dur-mid) var(--ease-out);
+  }
+  .cta-mid__cta:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--sh-xl);
+  }
+
+  .cta-mid__guarantee {
+    display: flex; align-items: center; gap: var(--sp-2);
+    font-size: var(--text-xs); color: rgba(255,255,255,0.55);
+  }
+
+  .cta-mid__stats {
+    position: relative; z-index: 1;
+    display: flex; gap: clamp(var(--sp-8), 5vw, var(--sp-16));
+    flex-wrap: wrap; justify-content: center;
+  }
+  .cta-mid__stat {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+  }
+  .cta-mid__stat strong {
+    font-family: var(--font-display);
+    font-size: 1.625rem; font-weight: 900;
+    color: var(--on-primary); letter-spacing: -0.03em;
+  }
+  .cta-mid__stat span {
+    font-size: var(--text-xs); color: rgba(255,255,255,0.6);
+    text-align: center; max-width: 140px; line-height: 1.4;
+  }
+
+  @media (max-width: 640px) {
+    .cta-mid__stats { gap: var(--sp-8); }
+  }
+</style>
