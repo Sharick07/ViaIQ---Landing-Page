@@ -6,48 +6,81 @@
     <div class="prob__header text-center reveal">
       <div class="chip chip--tertiary">El problema</div>
       <h2 class="t-xl prob__h2">
-        El 80% de tu tiempo<br />se va en leads que nunca compran.
+        ¿Te suena familiar?
       </h2>
       <p class="t-body" style="max-width:500px;margin-inline:auto;font-size:1.0625rem">
-        Sin un sistema de cualificación, todos los leads reciben la misma atención.
-        Los fríos consumen horas. Los calientes esperan. Y el negocio se queda estancado.
+        Estas situaciones ocurren todos los días en agencias que trabajan
+        sin un sistema de cualificación. No es falta de esfuerzo — es falta de información.
       </p>
     </div>
 
     <div class="prob__grid">
       {[
-        { pct: '68', label: 'del tiempo', icon: '⏱', desc: 'Las agencias invierten más de la mitad de su jornada en leads fríos que jamás convierten en ventas.', color: 'var(--tertiary-container)', text: 'var(--tertiary)' },
-        { pct: '3x', label: 'más caro', icon: '💸', desc: 'Adquirir un nuevo cliente cuesta hasta 3 veces más cuando no existe un proceso de cualificación previo.', color: '#fff8ed', text: '#8c6018' },
-        { pct: '1/5', label: 'sin seguimiento', icon: '📱', desc: 'Leads calientes se enfrían y se pierden porque no hay una herramienta que priorice quién necesita atención urgente.', color: 'var(--surface-low)', text: 'var(--on-surface-var)' },
+        {
+          tag: 'Tiempo perdido',
+          quote: 'Cotizo Maldivas en detalle durante dos horas. El lead responde: te aviso. Y nunca más vuelvo a saber de él.',
+          initials: 'LR',
+          name: 'Laura R.',
+          role: 'Dueña de agencia boutique',
+          color: 'var(--primary-fixed)',
+          accent: 'var(--primary)',
+        },
+        {
+          tag: 'Prioridad equivocada',
+          quote: 'Mi mejor agente pasó el martes entero con un lead que tenía $300 de presupuesto. Nadie lo sabía hasta que fue tarde.',
+          initials: 'CM',
+          name: 'Carlos M.',
+          role: 'Director comercial · LATAM',
+          color: '#fff3e0',
+          accent: '#8c6018',
+        },
+        {
+          tag: 'Venta perdida',
+          quote: 'Un cliente listo para pagar esperó tres días porque nadie en el equipo sabía que era el lead más caliente de la semana.',
+          initials: 'AP',
+          name: 'Ana P.',
+          role: 'Agente de viajes senior',
+          color: 'var(--tertiary-container)',
+          accent: 'var(--tertiary)',
+        },
       ].map((p, i) => (
         <div class="prob__card reveal" style={`--d:${(i * 0.1).toFixed(1)}s`}>
-          <div class="prob__card-top" style={`background:${p.color}`}>
-            <span class="prob__emoji">{p.icon}</span>
-            <div class="prob__metric">
-              <span style={`color:${p.text}`}>{p.pct}</span>
-              <small>{p.label}</small>
+
+          <!-- Tag problema -->
+          <div class="prob__card-tag" style={`--tag-color:${p.accent};--tag-bg:${p.color}`}>
+            <span class="prob__tag-dot" aria-hidden="true"></span>
+            {p.tag}
+          </div>
+
+          <!-- Cita -->
+          <div class="prob__card-body">
+            <span class="prob__card-mark" aria-hidden="true">"</span>
+            <blockquote class="prob__card-quote">{p.quote}</blockquote>
+          </div>
+
+          <!-- Autor -->
+          <div class="prob__card-author">
+            <div class="prob__author-av" style={`background:${p.color};color:${p.accent}`}>
+              {p.initials}
+            </div>
+            <div class="prob__author-info">
+              <span class="prob__author-name">{p.name}</span>
+              <span class="prob__author-role">{p.role}</span>
             </div>
           </div>
-          <div class="prob__card-body">
-            <p>{p.desc}</p>
-          </div>
+
         </div>
       ))}
     </div>
 
     <!-- Bridge -->
     <div class="prob__bridge reveal">
-      <div class="prob__bridge-arrow">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M12 5v14M5 12l7 7 7-7" stroke="var(--primary)"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
+      <div class="prob__bridge-line" aria-hidden="true"></div>
       <p class="prob__bridge-text">
-        ViaIQ automatiza todo esto para que puedas enfocarte en los clientes que realmente compran.
+        ViaIQ convierte esa incertidumbre en claridad — antes de que abras el chat.
       </p>
       <a href="#how-it-works" class="btn btn-primary">
-        Descubrir la solución →
+        Ver cómo lo resuelve →
       </a>
     </div>
 
@@ -66,54 +99,96 @@
     gap: var(--sp-5); margin-bottom: var(--sp-12);
   }
 
+  /* ── Card ──────────────────────────────────────────────── */
   .prob__card {
     background: var(--surface-lowest);
     border-radius: var(--r-xl);
-    overflow: hidden;
-    box-shadow: var(--sh-sm);
-    transition: transform var(--dur-mid) var(--ease-out), box-shadow var(--dur-mid);
-  }
-  .prob__card:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); }
-
-  .prob__card-top {
     padding: var(--sp-8);
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; flex-direction: column; gap: var(--sp-6);
+    box-shadow: var(--sh-sm);
+    border: 1px solid var(--surface-container);
+    transition: transform var(--dur-mid) var(--ease-out),
+                box-shadow var(--dur-mid) var(--ease-out);
+    position: relative; overflow: hidden;
   }
-  .prob__emoji { font-size: 2rem; }
+  .prob__card:hover { transform: translateY(-5px); box-shadow: var(--sh-lg); }
 
-  .prob__metric {
-    display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
+  /* Tag de problema */
+  .prob__card-tag {
+    display: inline-flex; align-items: center; gap: var(--sp-2);
+    align-self: flex-start;
+    font-size: var(--text-micro); font-weight: 700;
+    color: var(--tag-color);
+    background: var(--tag-bg);
+    padding: 5px 14px; border-radius: var(--r-full);
+    letter-spacing: 0.05em; text-transform: uppercase;
   }
-  .prob__metric span {
-    font-family: var(--font-display);
-    font-size: 2.25rem; font-weight: 900; letter-spacing: -0.03em; line-height: 1;
-  }
-  .prob__metric small {
-    font-size: var(--text-xs); font-weight: 600; color: var(--on-surface-muted);
+  .prob__tag-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: currentColor; flex-shrink: 0;
   }
 
+  /* Cuerpo de la cita */
   .prob__card-body {
-    padding: var(--sp-5) var(--sp-6);
-    background: var(--surface-lowest);
+    position: relative; flex: 1;
   }
-  .prob__card-body p {
-    font-size: var(--text-xs); color: var(--on-surface-var); line-height: 1.65;
+  .prob__card-mark {
+    position: absolute;
+    top: -8px; left: -4px;
+    font-family: Georgia, serif;
+    font-size: 5rem; line-height: 1;
+    color: var(--surface-container);
+    pointer-events: none;
+    user-select: none;
+    font-style: normal;
+  }
+  .prob__card-quote {
+    position: relative; z-index: 1;
+    font-size: var(--text-sm);
+    color: var(--on-surface-var);
+    line-height: 1.75;
+    margin: 0;
+    padding-top: var(--sp-6);
+    font-style: normal;
+  }
+
+  /* Autor */
+  .prob__card-author {
+    display: flex; align-items: center; gap: var(--sp-3);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--surface-container);
+  }
+  .prob__author-av {
+    width: 38px; height: 38px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 0.75rem; font-weight: 800;
+    flex-shrink: 0; letter-spacing: 0.02em;
+  }
+  .prob__author-info {
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .prob__author-name {
+    font-size: var(--text-xs); font-weight: 700;
+    color: var(--on-surface);
+  }
+  .prob__author-role {
+    font-size: var(--text-micro);
+    color: var(--on-surface-muted);
   }
 
   /* Bridge */
   .prob__bridge {
     display: flex; flex-direction: column; align-items: center;
-    gap: var(--sp-4); text-align: center;
+    gap: var(--sp-5); text-align: center;
   }
-  .prob__bridge-arrow {
-    width: 44px; height: 44px; border-radius: 50%;
-    background: var(--primary-fixed);
-    display: flex; align-items: center; justify-content: center;
-    animation: float-y2 2.5s ease-in-out infinite;
+  .prob__bridge-line {
+    width: 1px; height: 48px;
+    background: linear-gradient(to bottom, var(--primary-container), transparent);
   }
   .prob__bridge-text {
-    font-size: var(--text-md); font-weight: 600;
-    color: var(--on-surface); max-width: 480px; line-height: 1.5;
+    font-size: var(--text-md); font-weight: 500;
+    color: var(--on-surface-var); max-width: 440px; line-height: 1.6;
   }
 
   @media (max-width: 768px) { .prob__grid { grid-template-columns: 1fr; max-width: 400px; margin-inline: auto; } }

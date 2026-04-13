@@ -30,9 +30,9 @@
   <!-- Header -->
   <div class="modal__header">
     <div class="modal__logo" aria-hidden="true">
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-        <rect width="36" height="36" rx="10" fill="#4CAF7D"/>
-        <path d="M9 18L15 24L27 12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="18" r="16.5" stroke="var(--primary)" stroke-width="2.2"/>
+        <rect x="12.5" y="12.5" width="11" height="11" rx="1.5" stroke="var(--primary)" stroke-width="2.2" transform="rotate(45 18 18)"/>
       </svg>
     </div>
     <h2 class="modal__title" id="modal-title">Crea tu cuenta</h2>
@@ -384,154 +384,161 @@
 </script>
 
 <style>
-  /* ── Backdrop ─────────────────────────────────────────── */
+  /* ── Backdrop con blur ────────────────────────────────── */
   .modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(25, 28, 27, 0.55);
+    backdrop-filter: blur(10px) saturate(1.2);
+    -webkit-backdrop-filter: blur(10px) saturate(1.2);
     z-index: 200;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s;
+    transition: opacity var(--dur-slow) var(--ease-smooth);
   }
-
   .modal-backdrop--visible {
     opacity: 1;
     pointer-events: all;
   }
 
   /* ── Modal card ────────────────────────────────────────── */
-
-  /* CRITICAL: overrides display:flex when the hidden attribute is present */
-  .modal[hidden] {
-    display: none !important;
-  }
+  .modal[hidden] { display: none !important; }
 
   .modal {
     position: fixed;
     inset: 0;
     margin: auto;
     width: 100%;
-    max-width: 460px;
+    max-width: 440px;
     height: fit-content;
     max-height: 90vh;
     overflow-y: auto;
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-modal);
+    background: var(--surface-lowest);
+    border: 1px solid var(--surface-highest);
+    border-radius: var(--r-xl);
+    box-shadow: var(--sh-xl), 0 0 0 1px rgba(56,83,65,0.06);
     z-index: 201;
-    padding: var(--space-8);
+    padding: var(--sp-8);
     display: flex;
     flex-direction: column;
-    gap: var(--space-5);
-    animation: modal-in 0.22s cubic-bezier(0.34, 1.3, 0.64, 1);
+    gap: var(--sp-5);
+    animation: modal-in 0.28s var(--ease-spring);
   }
 
   @keyframes modal-in {
-    from { opacity: 0; transform: scale(0.94) translateY(8px); }
-    to   { opacity: 1; transform: scale(1) translateY(0); }
+    from { opacity: 0; transform: scale(0.93) translateY(12px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0); }
   }
 
-  /* Close */
+  /* ── Franja superior decorativa ──────────────────────── */
+  .modal::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-mid) 60%, var(--primary-fixed) 100%);
+    border-radius: var(--r-xl) var(--r-xl) 0 0;
+  }
+
+  /* ── Botón cerrar ────────────────────────────────────── */
   .modal__close {
     position: absolute;
-    top: var(--space-5);
-    right: var(--space-5);
-    width: 34px;
-    height: 34px;
-    border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-gray-mid);
-    transition: background 0.15s, color 0.15s;
+    top: var(--sp-5); right: var(--sp-5);
+    width: 32px; height: 32px;
+    border-radius: var(--r-md);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--on-surface-muted);
+    transition: background var(--dur-fast), color var(--dur-fast);
   }
-
   .modal__close:hover {
-    background: var(--color-gray-light);
-    color: var(--color-black);
+    background: var(--surface-container);
+    color: var(--on-surface);
   }
 
-  /* Header */
+  /* ── Header ──────────────────────────────────────────── */
   .modal__header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--space-3);
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center;
+    gap: var(--sp-3);
+    padding-top: var(--sp-2);
   }
 
   .modal__logo {
-    margin-bottom: var(--space-1);
+    width: 52px; height: 52px;
+    border-radius: var(--r-lg);
+    background: var(--primary-fixed);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: var(--sp-1);
   }
 
   .modal__title {
-    font-size: 1.375rem;
-    font-weight: 700;
-    color: var(--color-black);
+    font-family: Georgia, serif;
+    font-size: 1.375rem; font-weight: 700;
+    color: var(--on-surface);
+    letter-spacing: -0.02em;
   }
 
   .modal__subtitle {
     font-size: 0.9375rem;
-    color: var(--color-gray-mid);
+    color: var(--on-surface-muted);
+    line-height: 1.5;
   }
 
-  /* Plan badge */
-  .modal__plan-badge[hidden] {
-    display: none !important;
-  }
+  /* ── Plan badge ──────────────────────────────────────── */
+  .modal__plan-badge[hidden] { display: none !important; }
 
   .modal__plan-badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    background: var(--color-primary-light);
-    color: var(--color-primary-dark);
-    font-size: 0.875rem;
-    font-weight: 600;
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-full);
-    border: 1px solid rgba(76, 175, 125, 0.3);
+    display: flex; align-items: center; justify-content: center;
+    gap: var(--sp-2);
+    background: var(--primary-fixed);
+    color: var(--primary);
+    font-size: 0.875rem; font-weight: 600;
+    padding: var(--sp-2) var(--sp-4);
+    border-radius: var(--r-full);
+    border: 1px solid rgba(56,83,65,0.2);
   }
 
-  /* Form */
+  /* ── Formulario ──────────────────────────────────────── */
   .modal__form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
+    display: flex; flex-direction: column;
+    gap: var(--sp-4);
   }
 
-  /* Toggle */
+  /* Inputs heredados del global — refuerzo visual */
+  .form-input {
+    border-color: var(--surface-highest) !important;
+    background: var(--surface-low) !important;
+    transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+  }
+  .form-input:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px var(--primary-fixed) !important;
+    background: var(--surface-lowest) !important;
+    outline: none;
+  }
+
+  /* ── Toggle login/registro ───────────────────────────── */
   .modal__toggle {
     text-align: center;
     font-size: 0.9rem;
-    color: var(--color-gray-mid);
+    color: var(--on-surface-muted);
   }
-
   .modal__toggle-btn {
-    color: var(--color-primary);
-    font-weight: 600;
-    font-size: 0.9rem;
+    color: var(--primary);
+    font-weight: 600; font-size: 0.9rem;
     margin-left: 4px;
-    transition: opacity 0.15s;
+    transition: opacity var(--dur-fast);
   }
+  .modal__toggle-btn:hover { opacity: 0.7; text-decoration: underline; }
 
-  .modal__toggle-btn:hover {
-    opacity: 0.75;
-    text-decoration: underline;
-  }
-
-  /* Mobile: make modal cover full screen */
+  /* ── Mobile ──────────────────────────────────────────── */
   @media (max-width: 520px) {
     .modal {
-      border-radius: var(--radius-md) var(--radius-md) 0 0;
-      top: auto;
-      bottom: 0;
+      border-radius: var(--r-xl) var(--r-xl) 0 0;
+      top: auto; bottom: 0;
       max-height: 92vh;
-      animation: modal-up 0.22s cubic-bezier(0.34, 1.1, 0.64, 1);
+      animation: modal-up 0.28s var(--ease-spring);
     }
-
     @keyframes modal-up {
       from { transform: translateY(40px); opacity: 0; }
       to   { transform: translateY(0);    opacity: 1; }
